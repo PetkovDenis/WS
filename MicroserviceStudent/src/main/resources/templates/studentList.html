@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>List all functions</title>
+</head>
+<style>
+    .list {
+        margin-left: 0;
+        list-style: none;
+        counter-reset: li;
+        font-family: calibri;
+    }
+    .list li {
+        font-size:20px;
+        font-style: oblique;
+        padding: 10px 0;
+        position: relative;
+        left: 1.5em;
+        margin-bottom: 0.75em;
+        padding-left: 1em;
+        background: lightblue;
+        color: antiquewhite;
+    }
+
+    .button1 {
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    .button1:hover {
+        background-color: #4CAF50; /* Green */
+        color: white;
+    }
+</style>
+<body>
+<div class="list"></div>
+<script type="text/javascript">
+    async function getResponse() {
+        let response = await fetch('http://localhost:8081/studentsList')
+        let content = await response.json()
+        let list = document.querySelector('.list')
+        let key
+        console.log(content)
+        for (key in content) {
+            list.innerHTML +=
+                `<ol class="list">
+                                    <li>
+                                    Name: ${content[key].firstName}<p>
+                                    Patronymic:${content[key].middleName}<p>
+                                    LastName${content[key].lastName}<p>
+                                    Age:${content[key].age}<p>
+                                    Course:${content[key].course}<p>
+                                    Specialization:${content[key].specialization}<p>
+                                    <form method="post" action="/delete/${content[key].id}">
+                                    <button type="submit">Delete</button>
+                                         </form>
+                                    </li>
+                                    </ol>`
+        }
+    }
+    getResponse()
+</script>
+</body>
+</html>

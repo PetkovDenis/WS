@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    .form1 {
+        margin-left: 500px;
+    }
+    .button1{
+        width: 200px;
+        height: 40px;
+        background: cornflowerblue;
+    }
+</style>
+<body>
+<div>
+    <form class="form1" method="post" action="/addStudent">
+        <table>
+            <tr>
+                <td> Name: </td><td><input type="text" name="name" id="name" size="50"/></td></tr>
+            <tr>
+                <td> MiddleName: </td><td><input type="text" name="middleName" size="50"/></td></tr>
+            <tr>
+                <td> LastName: </td><td><input type="text" name="lastName" size="50"/></td></tr>
+            <tr>
+                <td> Specialization: </td><td><input type="text" name="specialization" size="50"/></td></tr>
+            <tr>
+                <td> Age: </td><td><input type="text" name="age" size="50"/></td></tr>
+            <tr>
+                <td> Course: </td><td><input type="text" name="course" size="50"/></td></tr>
+            <tr>
+                <td></td><td align="center"><button class="button1" type="submit" >Add student</button> </td></tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
