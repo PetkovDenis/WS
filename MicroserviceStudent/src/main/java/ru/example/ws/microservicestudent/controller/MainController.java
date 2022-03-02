@@ -20,7 +20,9 @@ public class MainController {
     }
 
     @GetMapping()
-    public String mainPage() {return "mainPage";}
+    public String mainPage() {
+        return "mainPage";
+    }
 
     @GetMapping("/studentsList")
     @ResponseBody
@@ -37,6 +39,7 @@ public class MainController {
     public String addFormStudents() {
         return "addStudent";
     }
+
     @PostMapping("/addStudent")
     public String studentAdd(@RequestParam("name") String name,
                              @RequestParam("middleName") String middleName,
@@ -46,15 +49,11 @@ public class MainController {
                              @RequestParam("course") int course) {
         Student student = new Student(name, middleName, lastName, specialization, age, course);
         service.addStudent(student);
-        return "mainPage";}
+        return "mainPage";
+    }
 
     @PostMapping("/delete/{id}")
     public String studentDelete(@PathVariable("id") int id) {
-        service.deleteStudent(id);
-        return "redirect:/";
-    }
-    @PostMapping("/change/{id}")
-    public String studentChange(@PathVariable("id") int id){
         service.deleteStudent(id);
         return "redirect:/";
     }

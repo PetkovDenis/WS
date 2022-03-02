@@ -42,16 +42,25 @@ public class StudentService {
         return studentDTO;
     }
 
-    public void addStudent(Student student) {
+    public boolean addStudent(Student student) {
+        boolean studentStatus = false;
         studentRepository.save(student);
+        if(studentRepository.existsById(student.getId())){
+        studentStatus = true;
+        }
+        return studentStatus;
     }
 
-    public void deleteStudent(int id) {
+    public boolean deleteStudent(int id) {
+        boolean result;
         if (studentRepository.existsById(id)) {
+            result = true;
             studentRepository.deleteById(id);
-        } else {
-            System.out.println("Такого студента нет");
+        }else{
+            result = false;
         }
+        return result;
     }
-}
+    }
+
 
