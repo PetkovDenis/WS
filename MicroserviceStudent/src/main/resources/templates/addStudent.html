@@ -8,10 +8,20 @@
     .form1 {
         margin-left: 500px;
     }
-    .button1{
-        width: 200px;
+
+    .button {
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50; /* Green */
+        transition-duration: 0.4s;
+        width: 40%;
         height: 40px;
-        background: cornflowerblue;
+        margin-left: 20px;
+    }
+
+    .button:hover {
+        background-color: #4CAF50; /* Green */
+        color: white;
     }
 </style>
 <body>
@@ -19,20 +29,33 @@
     <form class="form1" method="post" action="/addStudent">
         <table>
             <tr>
-                <td> Name: </td><td><input type="text" name="name" id="name" size="50"/></td></tr>
+                <td> Name:</td>
+                <td><input type="text" name="name" id="name" size="50"/></td>
+            </tr>
             <tr>
-                <td> MiddleName: </td><td><input type="text" name="middleName" size="50"/></td></tr>
+                <td> MiddleName:</td>
+                <td><input type="text" name="middleName" size="50"/></td>
+            </tr>
             <tr>
-                <td> LastName: </td><td><input type="text" name="lastName" size="50"/></td></tr>
+                <td> LastName:</td>
+                <td><input type="text" name="lastName" size="50"/></td>
+            </tr>
             <tr>
-                <td> Specialization: </td><td><input type="text" name="specialization" size="50"/></td></tr>
+                <td> Specialization:</td>
+                <td><input type="text" name="specialization" size="50"/></td>
+            </tr>
             <tr>
-                <td> Age: </td><td><input type="text" name="age" size="50"/></td></tr>
+                <td> Age:</td>
+                <td><input type="text" name="age" size="50"/></td>
+            </tr>
             <tr>
-                <td> Course: </td><td><input type="text" name="course" size="50"/></td></tr>
+                <td> Course:</td>
+                <td><input type="text" name="course" size="50"/></td>
+            </tr>
             <tr>
-                <td></td><td align="center"><button class="button1" type="submit" >Add student</button> </td></tr>
         </table>
+
+        <button class="button" type="submit">Add student</button>
     </form>
 </div>
 </body>

@@ -45,8 +45,8 @@ public class StudentService {
     public boolean addStudent(Student student) {
         boolean studentStatus = false;
         studentRepository.save(student);
-        if(studentRepository.existsById(student.getId())){
-        studentStatus = true;
+        if (studentRepository.existsById(student.getId())) {
+            studentStatus = true;
         }
         return studentStatus;
     }
@@ -56,11 +56,11 @@ public class StudentService {
         if (studentRepository.existsById(id)) {
             result = true;
             studentRepository.deleteById(id);
-        }else{
+        } else {
             result = false;
         }
         return result;
     }
-    }
+}
 
 
