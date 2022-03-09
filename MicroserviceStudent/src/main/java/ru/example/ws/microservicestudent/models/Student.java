@@ -1,17 +1,21 @@
 package ru.example.ws.microservicestudent.models;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "students")
 public class Student {
 
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Integer id;
     @Column(name = "firstname")
     private String firstName;
     @Column(name = "middlename")
@@ -35,46 +39,4 @@ public class Student {
     }
     public Student() {}
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getFirstName() {
-        return firstName;
-    }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public String getMiddleName() {
-        return middleName;
-    }
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public String getSpecialization() {
-        return specialization;
-    }
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-    public int getCourse() {
-        return course;
-    }
-    public void setCourse(int course) {
-        this.course = course;
-    }
 }

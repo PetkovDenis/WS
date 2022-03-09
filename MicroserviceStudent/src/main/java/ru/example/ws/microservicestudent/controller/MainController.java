@@ -1,10 +1,12 @@
 package ru.example.ws.microservicestudent.controller;
 
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ru.example.ws.microservicestudent.dtos.StudentDTO;
+import ru.example.ws.microservicestudent.controller.dto.StudentDTO;
 import ru.example.ws.microservicestudent.models.Student;
+import ru.example.ws.microservicestudent.services.DTOService;
 import ru.example.ws.microservicestudent.services.StudentService;
 
 import java.util.List;
@@ -13,10 +15,12 @@ import java.util.List;
 public class MainController {
 
     private final StudentService service;
+    private final DTOService dtoService;
 
     @Autowired
-    public MainController(StudentService service) {
+    public MainController(StudentService service, DTOService dtoService) {
         this.service = service;
+        this.dtoService = dtoService;
     }
 
     @GetMapping()
@@ -27,7 +31,7 @@ public class MainController {
     @GetMapping("/studentsList")
     @ResponseBody
     public List<StudentDTO> studentList() {
-        return service.getAllDTOStudents();
+        return dtoService.getAllDTO();
     }
 
     @GetMapping("/list")

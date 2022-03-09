@@ -6,5 +6,4 @@ import ru.example.ws.microservicestudent.models.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Integer> {
-
 }

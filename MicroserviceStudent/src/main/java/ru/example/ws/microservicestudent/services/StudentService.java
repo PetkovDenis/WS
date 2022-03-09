@@ -2,15 +2,16 @@ package ru.example.ws.microservicestudent.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.example.ws.microservicestudent.dtos.StudentDTO;
+import ru.example.ws.microservicestudent.controller.dto.StudentDTO;
 import ru.example.ws.microservicestudent.models.Student;
 import ru.example.ws.microservicestudent.repository.StudentRepository;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class StudentService {
+public class StudentService implements CRUDService {
 
     private final StudentRepository studentRepository;
 
@@ -19,47 +20,45 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Student> getAllStudent() {
+    public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
-    public List<StudentDTO> getAllDTOStudents() {
-        return studentRepository.findAll()
-                .stream()
-                .map(this::convertStudentsDTO)
-                .collect(Collectors.toList());
+    @Override
+    public Student getOneStudent(int id) {
+        return studentRepository.getById(id);
     }
 
-    public StudentDTO convertStudentsDTO(Student student) {
-        StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setId(student.getId());
-        studentDTO.setFirstName(student.getFirstName());
-        studentDTO.setMiddleName(student.getMiddleName());
-        studentDTO.setLastName(student.getLastName());
-        studentDTO.setAge(student.getAge());
-        studentDTO.setCourse(student.getCourse());
-        studentDTO.setSpecialization(student.getSpecialization());
-        return studentDTO;
-    }
-
-    public boolean addStudent(Student student) {
-        boolean studentStatus = false;
-        studentRepository.save(student);
-        if (studentRepository.existsById(student.getId())) {
-            studentStatus = true;
-        }
-        return studentStatus;
-    }
-
-    public boolean deleteStudent(int id) {
-        boolean result;
+    @Override
+    public void deleteStudent(int id) {
         if (studentRepository.existsById(id)) {
-            result = true;
             studentRepository.deleteById(id);
         } else {
-            result = false;
+            throw new EntityExistsException("Student not found");
         }
-        return result;
+    }
+
+    @Override
+    public Student createStudent(Student student) {
+        Student studentSaved = studentRepository.save(student);
+        if (studentRepository.existsById(studentSaved.getId())) {
+            return studentSaved;
+        } else {
+            throw new EntityExistsException("Student not found");
+        }
+    }
+
+    @Override
+    public Student updateStudent(int id, Student student) {
+
+        if (studentRepository.existsById(id)) {
+            studentRepository.deleteById(id);
+            student.setId(id);
+            studentRepository.save(student);
+        } else {
+            throw new EntityExistsException("Student not found");
+        }
+        return student;
     }
 }
 
